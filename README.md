@@ -1,5 +1,5 @@
 # avocet
-A program that wraps a directory and appends the data from its manifest.yml to the header.
+Avocet is a cli tool for packing directory and appending manifest to file header.
 
 Install avocet command to the $GOPATH/bin directory:
 ```go

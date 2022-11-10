@@ -1,5 +1,6 @@
 .DS_Store
 testdir
+.vscode
 
 # Binaries for programs and plugins
 *.exe
