@@ -2,10 +2,12 @@
 Avocet is a cli tool for packing directory and appending manifest to file header.
 
 Install avocet command to the $GOPATH/bin directory:
-```go
-$ go install
+```bash
+go install
 ```
 Run command:
-```go
-$ avocet
+```bash
+# package current directory
+avocet .
+# this will produce a file named {cwd}.zip
 ```
