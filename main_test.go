@@ -1,6 +1,14 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
+
+func TestApp(t *testing.T) {
+	os.Args = []string{"avocet", "testdir"}
+	main()
+}
 
 func TestGetFilesInDirectory(t *testing.T) {
 	// var files []string
