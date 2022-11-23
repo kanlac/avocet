@@ -6,7 +6,7 @@ import (
 )
 
 func TestApp(t *testing.T) {
-	os.Args = []string{"avocet", "testdir"}
+	os.Args = []string{"avocet", "create", "testdir"}
 	main()
 }
 

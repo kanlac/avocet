@@ -8,6 +8,6 @@ go install
 Run command:
 ```bash
 # package current directory
-avocet .
+avocet create .
 # this will produce a file named {cwd}.zip
 ```

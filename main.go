@@ -14,28 +14,45 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:  "make",
+		Name:  "avocet",
 		Usage: "",
-		Action: func(cCtx *cli.Context) error {
-			arg := cCtx.Args().Get(0)
-			if len(arg) == 0 {
-				return fmt.Errorf("please provide a path argument")
-			}
-			absPath, err := getAbsolutePath(arg)
-			if err != nil {
-				return fmt.Errorf("cannot get absolute path from %s: %+v", arg, err)
-			}
-			var files []string
-			if err = getFilesInDirectory(absPath, &files); err != nil {
-				return fmt.Errorf("cannot get files in directory %s: %+v", absPath, err)
-			}
-			compressFiles(filepath.Base(absPath), files)
-			return nil
-		},
+		Version: "1.0",
+		UseShortOptionHandling: true,
+		DefaultCommand: "create",
+		Commands: []*cli.Command{getCreateCommand(),},
 	}
 
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
+	}
+}
+
+// getCreateCommand returns a Create command
+func getCreateCommand() *cli.Command {
+	return &cli.Command{
+		Name: "create",
+		Aliases: []string{"c"},
+		Usage: "create a zip file",
+		Action: getCreateAction(),
+	}
+}
+
+func getCreateAction() cli.ActionFunc {
+	return func(cCtx *cli.Context) error {
+		arg := cCtx.Args().Get(0)
+		if len(arg) == 0 {
+			return fmt.Errorf("please provide a path argument")
+		}
+		absPath, err := getAbsolutePath(arg)
+		if err != nil {
+			return fmt.Errorf("cannot get absolute path from %s: %+v", arg, err)
+		}
+		var files []string
+		if err = getFilesInDirectory(absPath, &files); err != nil {
+			return fmt.Errorf("cannot get files in directory %s: %+v", absPath, err)
+		}
+		compressFiles(filepath.Base(absPath), files)
+		return nil
 	}
 }
 
